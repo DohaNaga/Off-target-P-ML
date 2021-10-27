@@ -29,8 +29,6 @@ The script is tested under R version 3.5.1 in R studio version 1.1.456.
 - Tfruns 1.4
 
 
-
-
 ### Installation
 
 
@@ -119,19 +117,43 @@ The script is tested under Python version 3.6.5 in Jupyter notebook  version 7.1
 ##### Dependencies : 
 - Python ≥ 3.6
 - MXNet ≥ 1.7.0.
-
+- Autogluon 0.0.13
+- sklearn 0.22.2
+- numpy 1.19.2
+- pandas 0.25.3
 ### Installation
-Use the same conda environment previously created for AutoGluon installation
+
+1- Create a working directory for Autogluon
+```sh
+$ mkdir Autogluon
+$ cd Autogluon
+
+#create a folder for the models
+$ mkdir Autogluon_models
+
+#create a folder for the Autogluon input files
+$ cd ../
+$ mkdir Autogluon_files
+ ```
+2- Use the same conda environment previously created for AutoGluon installation
 
 ```sh
 $ source activate r-tensorflow
-
+(r-tensorflow)$ python3 -m pip install -U setuptools wheel
 (r-tensorflow)$ python3 -m pip install -U "mxnet<2.0.0, >=1.7.0"
 (r-tensorflow)$ python3 -m pip install autogluon
   ```
 For more information/problems or alternative installation methods for Autogluon installation, please visit  https://auto.gluon.ai/stable/install.html
 
-### Training
-Describe the format of Autogluon files
 
+
+### Training
+
+Describe the format of Autogluon files
+You can run the script  ```Autogluon_models.py``` within a jupyter notebook step by step or any other python interface for the training in the AUTOGLUON directory.
+
+```sh
+
+python3 Autogluon_models.py
+  ```
 Describe the Autogluon jupyter notebook (mention if it includes the evaluation as well)
