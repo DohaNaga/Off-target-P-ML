@@ -1,24 +1,48 @@
 
-# Off-target-modelling
+# Off-target modelling
 This repository contains the necessary scripts to derive off-target models using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon).
 
+The main dataset is `dataset_1` which consists of several coloumns, most importantly:
 
+- CAS.number : public id for the compounds
+-  OFF_TARGET : the name of the off-target against which the compound is screened
+-  SMILES
+-  BINARY_VALUE: whether the compound is active (1) or inactive (0) upon the corresponding target
 
+You can replace `Dataset_1` with your own dataset (must be the same name and structure).
+## I. Preparation of the working directory
 
-## 1- Preparation of the models input
+- Download and place the folder ```offtarget-models``` into your home directory
 
-ECFP4 fingerprints are used for the predictions of the binary activities of the structures. These fingerprints need to be created as a first step and will be used as an input for the training of both the neural networks and the autogluon models.
+## II. Preparation of the models input for both the neuralnetworks and autogluon models
 
-Use the script `fingerprints_preparation.R` to generate the ECFP4 fingerprints for the required dataset (in this case `dataset_1`)
+ECFP4 fingerprints are used for the predictions of the binary activities of the structures. These fingerprints need to be created as a first step and will be used as an input for the training of both: the neural networks and the autogluon models.
+
+You will use the script `fingerprints_preparation.R` to generate the ECFP4 fingerprints for the compounds in `dataset_1`.
 
 The script is tested under R version 3.5.1 in R studio version 1.1.456.
+
 ##### Dependencies : 
 - R 3.5.1
 - rcdk 3.5.0
 - rcdklibs 2.3
 
 
-## 2- Neural networks models
+##### Execution of the script
+```sh
+#navigate to the folder
+$ cd offtarget_models
+
+#Run the script
+$ Rscript fingerprints_preparation.R
+
+```
+
+### Outcome
+
+A file named `dataset_2` will be produced which contains the CAS.Number of the molecules and their ECFP4 binary fingerprints.
+
+## III. Neural networks models
 The script is tested under R version 3.5.1 in R studio version 1.1.456.
 
 ##### Dependencies : 
@@ -29,15 +53,10 @@ The script is tested under R version 3.5.1 in R studio version 1.1.456.
 - Tfruns 1.4
 
 
-### Installation
+### 1- Installation
 
 
-1- Create a working directory
-  ```sh
-mkdir tuning
-  ```
-
-2. Create a conda working environment from the unix command line
+1. Create a conda working environment from the unix command line
 
   ```sh
 
@@ -96,22 +115,53 @@ head(x_train)
 
 ```
 
+If you get an error regarding the locating python you can add in R:
+
+
+```{r}
+#path_python3 is the path to python3 in your conda env
+use_python("path_python3")
+```
+
 For more information/problems regarding Tensorflow installation in R or alternative installation methods, please visit https://tensorflow.rstudio.com/installation/
 
-### Training
+### 2- Training
+
+There are two main training scripts in the NeuralNetwork folder: 
+- `tuning_1.R` creates the training/test sets, calls the script tuning_2.R and runs the grid search. 
+- `tuning_2.R` creates, compiles and fits the models. 
+
+##### Execution of the training script 
+
+```sh
+#navigate to the NeuralNetworks folder
+$  cd NeuralNetworks
+
+#Execute the script tuning_1 (which calls and executes tuning_2.R)
+
+$ Rscript tuning_1.R
+ ```
+
+### Outcome
+A folder called `tuning` will be created. This folder should contain subfolders named by the OFF_TARGET. These subfolders, will contain three folders:
+- best_runs_ba : A folder containing the best model resulting from the grid search with respect to the validation balanced accuracy.
+- best_runss_acc :  A folder containing the best model resulting from the grid search with respect to the validation  accuracy.
+- best_runs_loss :  A folder containing the best model resulting from the grid search with respect to the validation loss.
+
+Inside these subdirectories, the should be present in .h5 format and the validation .json files
 
 Describe that you can use it for this specific target list or for another one
 
-Describe the training files (two files) , describe the output files generated , the sh file 
+ describe the output files generated , the sh file 
 
 
 
-### Evaluation 
+### 3- Evaluation 
 Describe the evaluation file
 
 
 
-## 2- AutoGluon models
+## IV. AutoGluon models
 The script is tested under Python version 3.6.5 in Jupyter notebook  version 7.12.0. 
 
 ##### Dependencies : 
@@ -121,7 +171,7 @@ The script is tested under Python version 3.6.5 in Jupyter notebook  version 7.1
 - sklearn 0.22.2
 - numpy 1.19.2
 - pandas 0.25.3
-### Installation
+### 1- Installation
 
 1- Create a working directory for Autogluon
 ```sh
@@ -147,10 +197,10 @@ For more information/problems or alternative installation methods for Autogluon 
 
 
 
-### Training
+### 2- Training
 
 Describe the format of Autogluon files
-You can run the script  ```Autogluon_models.py``` within a jupyter notebook step by step or any other python interface for the training in the AUTOGLUON directory.
+You can run the script  ```Autogluon_models.py``` within a jupyter notebook step by step or any other python interface for the training in the AutoGluon directory.
 
 ```sh
 
