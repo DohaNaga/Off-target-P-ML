@@ -1,15 +1,16 @@
 
 # Off-target modelling
-This repository contains the necessary scripts to derive off-target models using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon).
+This repository contains the necessary scripts to build the off-target models explained in the paper using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon).
 
-The main dataset is `dataset_1` which consists of several coloumns, most importantly:
+A sample of the main dataset used in the paper is provided : `dataset_1` which  consists of several coloumns, most importantly:
 
 - CAS.number : public id for the compounds
 -  OFF_TARGET : the name of the off-target against which the compound is screened
 -  SMILES
 -  BINARY_VALUE: whether the compound is active (1) or inactive (0) upon the corresponding target
 
-You can replace `Dataset_1` with your own dataset (must be the same name and structure).
+You can replace `Dataset_1` with your own dataset (must have the same name, column annotations and format).
+
 ## I. Preparation of the working directory
 
 - Download and place the folder ```offtarget-models``` into your home directory
@@ -133,6 +134,8 @@ There are two main training scripts in the NeuralNetwork folder:
 
 ##### Execution of the training script 
 
+- If you are running the script on your local machine:
+
 ```sh
 #navigate to the NeuralNetworks folder
 $  cd NeuralNetworks
@@ -142,11 +145,25 @@ $  cd NeuralNetworks
 $ Rscript tuning_1.R
  ```
 
+- If you are running the script on a High Performance Cluster (HPC) machine with GPUS, you can use the `tuning.sh` script :
+
+```sh
+$ sbatch tuning.sh 
+ ```
+
+(Arguments of tuning.sh can be adjusted as required within the script)
+ 
 ### Outcome
+
+draw a tree better
+
+
 A folder called `tuning` will be created. This folder should contain subfolders named by the OFF_TARGET. These subfolders, will contain three folders:
 - best_runs_ba : A folder containing the best model resulting from the grid search with respect to the validation balanced accuracy.
 - best_runss_acc :  A folder containing the best model resulting from the grid search with respect to the validation  accuracy.
 - best_runs_loss :  A folder containing the best model resulting from the grid search with respect to the validation loss.
+
+Another
 
 Inside these subdirectories, the should be present in .h5 format and the validation .json files
 
@@ -157,9 +174,18 @@ Describe that you can use it for this specific target list or for another one
 
 
 ### 3- Evaluation 
+
+###### Dependencies
+-caret 6.0-80
+-yardstick 0.0.4
+-PPROC 1.3.1
+-ggpubr 0.2.3
+
+
+
 Describe the evaluation file
 
-
+#use the script evaluation_paper.R to evaluate models. This script generates a table called "nn_bestba_allmetrics" which contains all the evaluation metrics for the corresponding models.
 
 ## IV. AutoGluon models
 The script is tested under Python version 3.6.5 in Jupyter notebook  version 7.12.0. 
