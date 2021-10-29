@@ -287,7 +287,7 @@ Describe the format of Autogluon files
 - You can run the script  `Autogluon_models.py` within a jupyter notebook step by step or any other python interface for the training in the AutoGluon directory. This script trains the autogluon models for all the targets and evaluates them on the test sets as well.
 
 - The training settings used in the scripts are the same used in the paper. For more information on other  training settings please visit https://auto.gluon.ai/stable/api/autogluon.predictor.html#autogluon.tabular.TabularPredictor.fit
-- 
+
 ##### Execution of the training/evaluation script 
 
 ```sh
