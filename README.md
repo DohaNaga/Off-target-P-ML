@@ -16,7 +16,7 @@ You can replace `dataset_1` with your own dataset (must have the same name, colu
 
 ## I. Preparation of the working directory
 
-- Download and place the folder ```offtarget-models``` into your home directory
+- Download and place the folder ```off-targetmodels``` into your home directory
 
 ## II. Preparation of the models input for both the neuralnetworks and autogluon models
 
