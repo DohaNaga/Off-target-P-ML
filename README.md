@@ -2,6 +2,9 @@
 # Off-target modelling
 This repository contains the necessary scripts to build the off-target models explained in the paper using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics for each model.
 
+
+## Support: doha.naga@roche.com
+
 A sample of the main dataset used in the paper is provided : `dataset_1` which  consists of several coloumns, most importantly:
 
 - CAS.number : public id for the compounds
@@ -44,8 +47,10 @@ $ Rscript fingerprints_preparation.R
 A file named `dataset_2` will be produced which contains the CAS.Number of the molecules and their ECFP4 binary fingerprints.
 
 ## III. Neural networks models
-The script is tested under R version 3.5.1 in R studio version 1.1.456.
-All scripts must be run from the NeuralNetwork directory
+- The script is tested under R version 3.5.1 in R studio version 1.1.456.
+
+- All scripts must be run from the NeuralNetwork directory
+
 ```sh
 #navigate to the NeuralNetworks folder
 $  cd NeuralNetworks
@@ -140,7 +145,7 @@ There are two main training scripts in the NeuralNetwork folder:
 
 ##### Important notes:
 - The grid search parameters used in the scripts are the same ones used in the paper, you can edit these parameters directly in `tuning_1.R`
-- In `tuning_1.R` we save the runs with best evaluation accuracy, loss and balanced accuracy. The rest of the runs are cleaned and permanently deleted for memory issues. This can be edited directly in the script `tuning_1.R`
+- In `tuning_1.R` we save the runs with best evaluation accuracy, loss and balanced accuracy. The rest of the runs are cleaned and permanently deleted for memory issues. If you wish to do otherwise (e.g save all the runs), you can  edit directly in the script `tuning_1.R`
 
 For more info on tfruns, please visit : https://tensorflow.rstudio.com/tools/tfruns/overview/
 
@@ -216,7 +221,7 @@ $ Rscript evaluation.R
  ```
 ### Outcome
 
-Within the folder `tuning`, the script creates an excel file `nn_bestba_allmetrics.xls` with the evaluation metrics of all target models and a folder `plots` with the ROC and PR curves for all target models
+Within the folder `tuning`, the script creates an excel file `nn_bestba_allmetrics.xls` with the target name and corresponding evaluation metrics (of all target models) and a folder `plots` with the ROC and PR curves for all target models.
 
 ```
 tuning
@@ -233,7 +238,20 @@ tuning
 
 
 ## IV. AutoGluon models
-The script is tested under Python version 3.6.5 in Jupyter notebook  version 7.12.0. 
+
+- The script `Autogluon_models.py` is tested under Python version 3.6.5 in Jupyter notebook  version 7.12.0. 
+- The script constructs models for the 50 off-targets that are mentioned in the paper and are defined in a list in the begining of the script.
+- The script must be run from the AutoGluon directory.
+
+```sh
+#navigate to the AutoGluon folder
+$  cd Autogluon
+
+#create a directory for the training/test sets files
+$ mkdir Autogluon_files
+
+```
+
 
 ##### Dependencies : 
 - Python ≥ 3.6
@@ -244,19 +262,7 @@ The script is tested under Python version 3.6.5 in Jupyter notebook  version 7.1
 - pandas 0.25.3
 ### 1- Installation
 
-1- Create a working directory for Autogluon
-```sh
-$ mkdir Autogluon
-$ cd Autogluon
-
-#create a folder for the models
-$ mkdir Autogluon_models
-
-#create a folder for the Autogluon input files
-$ cd ../
-$ mkdir Autogluon_files
- ```
-2- Use the same conda environment previously created for AutoGluon installation
+1- Use the same conda environment previously created for AutoGluon installation
 
 ```sh
 $ source activate r-tensorflow
@@ -267,14 +273,59 @@ $ source activate r-tensorflow
 For more information/problems or alternative installation methods for Autogluon installation, please visit  https://auto.gluon.ai/stable/install.html
 
 
+### Input
 
-### 2- Training
+- You can use autogluon_fileprep.R to generate the training and test files for the autogluon models
+- If you would like to use your proper dataset, make sure to create the training and test files in the same format of dummytrain_autogluon.csv and to name the files in the following manner:
+
+#in dummytrain_autogluon the x1 to x1024 are the finger prints, the "ID" represents the compound ids, for example the cas numbers, the BINARY_VALUE is the activity coloumn.
+
+
+### 2- Training and evaluation
 
 Describe the format of Autogluon files
-You can run the script  ```Autogluon_models.py``` within a jupyter notebook step by step or any other python interface for the training in the AutoGluon directory.
+- You can run the script  `Autogluon_models.py` within a jupyter notebook step by step or any other python interface for the training in the AutoGluon directory. This script trains the autogluon models for all the targets and evaluates them on the test sets as well.
+
+- The training settings used in the scripts are the same used in the paper. For more information on other  training settings please visit https://auto.gluon.ai/stable/api/autogluon.predictor.html#autogluon.tabular.TabularPredictor.fit
+- 
+##### Execution of the training/evaluation script 
 
 ```sh
-
 python3 Autogluon_models.py
   ```
-Describe the Autogluon jupyter notebook (mention if it includes the evaluation as well)
+
+
+##### Outcome
+
+Within the folder AutoGluon, a folder named `METRICS` will be created, this folder will contain csv files with the evaluation metrics of all the target models. These csv files will be named by the targetname.
+For each target, a folder (named also by the target name) will be created. Each target folder will contain all the trained models and the fnal weighted ensemble model.
+
+```
+AutoGluon
+├── METRICS
+│   ├──metric_'OFF_TARGET'.csv
+│
+├── model_'OFF_TARGET'
+    ├── models
+        ├──model 1
+        │  ├──model 1 fold 1
+        │  │    ├── model.pkl
+        │  ├──model 1 fold n  
+        │       ├──model.pkl
+        ├──model n
+        │   ├──model  n fold 1
+        │      ├──model.pkl     
+        │   ├──model n fold n   
+        │      ├──model.pkl
+        │ 
+        ├── weighted_ensemble
+            ├──model.pkl
+
+```
+
+
+
+
+
+
+
