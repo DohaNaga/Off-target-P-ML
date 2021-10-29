@@ -1,6 +1,6 @@
 
 # Off-target modelling
-This repository contains the necessary scripts to build the off-target models explained in the paper using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon).
+This repository contains the necessary scripts to build the off-target models explained in the paper using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics for each model.
 
 A sample of the main dataset used in the paper is provided : `dataset_1` which  consists of several coloumns, most importantly:
 
@@ -9,7 +9,7 @@ A sample of the main dataset used in the paper is provided : `dataset_1` which  
 -  SMILES
 -  BINARY_VALUE: whether the compound is active (1) or inactive (0) upon the corresponding target
 
-You can replace `Dataset_1` with your own dataset (must have the same name, column annotations and format).
+You can replace `dataset_1` with your own dataset (must have the same name, column annotations and format).
 
 ## I. Preparation of the working directory
 
@@ -45,6 +45,12 @@ A file named `dataset_2` will be produced which contains the CAS.Number of the m
 
 ## III. Neural networks models
 The script is tested under R version 3.5.1 in R studio version 1.1.456.
+All scripts must be run from the NeuralNetwork directory
+```sh
+#navigate to the NeuralNetworks folder
+$  cd NeuralNetworks
+```
+
 
 ##### Dependencies : 
 - Python ≥ 3.6
@@ -132,14 +138,17 @@ There are two main training scripts in the NeuralNetwork folder:
 - `tuning_1.R` creates the training/test sets, calls the script tuning_2.R and runs the grid search. 
 - `tuning_2.R` creates, compiles and fits the models. 
 
+##### Important notes:
+- The grid search parameters used in the scripts are the same ones used in the paper, you can edit these parameters directly in `tuning_1.R`
+- In `tuning_1.R` we save the runs with best evaluation accuracy, loss and balanced accuracy. The rest of the runs are cleaned and permanently deleted for memory issues. This can be edited directly in the script `tuning_1.R`
+
+For more info on tfruns, please visit : https://tensorflow.rstudio.com/tools/tfruns/overview/
+
 ##### Execution of the training script 
 
 - If you are running the script on your local machine:
 
 ```sh
-#navigate to the NeuralNetworks folder
-$  cd NeuralNetworks
-
 #Execute the script tuning_1 (which calls and executes tuning_2.R)
 
 $ Rscript tuning_1.R
@@ -155,23 +164,36 @@ $ sbatch tuning.sh
  
 ### Outcome
 
-draw a tree better
+
+A folder called `tuning` will be created. This folder should contain subfolders named by the OFF_TARGET name. These subfolders, will contain three folders:
+- best_runs_ba : A folder containing the best model resulting from the grid search with respect to the best evaluation balanced accuracy.
+- best_runs_acc :  A folder containing the best model resulting from the grid search with respect to the best evaluation  accuracy.
+- best_runs_loss :  A folder containing the best model resulting from the grid search with respect to the best evaluation loss.
+- grid_inforuns : A folder containing all the information on the grid search runs for the balanced accuracy
+
+```
+tuning
+├──grid_inforuns
+│  ├── 'OFF_TARGET'.xlsx
+│
+├── 'OFF_TARGET' best_runs_ba
+│    ├──Run_YYYY_MM_DD-HH_MM_SS
+│    │    ├──'OFF_TARGET'.h5 
+│    │    ├── tfruns.d
+│    │    │    ├──evaluation.json
+│    │    │    ├──flags.json  
+│    │    │    ├──metrics.json  
+│    │    │
+│    │    ├── plots
+│    │    │      ├──Rplot001.png
+│    │    │      
+│    │    ├── 'OFF_TARGET'checkpoints
+│    │  
+├── 'OFF_TARGET'best_runs_acc
+├── 'OFF_TARGET'best_runs_loss
 
 
-A folder called `tuning` will be created. This folder should contain subfolders named by the OFF_TARGET. These subfolders, will contain three folders:
-- best_runs_ba : A folder containing the best model resulting from the grid search with respect to the validation balanced accuracy.
-- best_runss_acc :  A folder containing the best model resulting from the grid search with respect to the validation  accuracy.
-- best_runs_loss :  A folder containing the best model resulting from the grid search with respect to the validation loss.
-
-Another
-
-Inside these subdirectories, the should be present in .h5 format and the validation .json files
-
-Describe that you can use it for this specific target list or for another one
-
- describe the output files generated , the sh file 
-
-
+```
 
 ### 3- Evaluation 
 
@@ -182,10 +204,33 @@ Describe that you can use it for this specific target list or for another one
 -ggpubr 0.2.3
 
 
+The `evaluation.R` script :
+- Imports the best model of each target (in terms of evalution balanced accuracy) in the .h5 format
+- Tests it on the external test sets that werent used in the training or validation
+- Calculate the rest of the evaluation metrics(MCC,AUC,AUCPR,Accuracy) and draws AUC/AUCPR plots.
 
-Describe the evaluation file
+##### Execution of the evaluation script
 
-#use the script evaluation_paper.R to evaluate models. This script generates a table called "nn_bestba_allmetrics" which contains all the evaluation metrics for the corresponding models.
+```sh
+$ Rscript evaluation.R
+ ```
+### Outcome
+
+Within the folder `tuning`, the script creates an excel file `nn_bestba_allmetrics.xls` with the evaluation metrics of all target models and a folder `plots` with the ROC and PR curves for all target models
+
+```
+tuning
+├──nn_bestba_allmetrics.xls
+│  
+├── plots
+    ├── AUC
+    │   ├── AUC_PLOT 'OFF_TARGET'.png
+    │
+    ├── AUCPR
+        ├── PR_PLOT 'OFF_TARGET'.png
+```
+
+
 
 ## IV. AutoGluon models
 The script is tested under Python version 3.6.5 in Jupyter notebook  version 7.12.0. 
