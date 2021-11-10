@@ -1,6 +1,6 @@
 
 # Off-target modelling
-This repository contains the necessary scripts to build the off-target models explained in the paper using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics for each model.
+This repository contains the necessary scripts to build the binary off-target models explained in the paper using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics for each model. 
 
 
 ## Support: doha.naga@roche.com
@@ -12,7 +12,9 @@ A sample of the main dataset used in the paper is provided : `dataset_1` which  
 -  SMILES
 -  BINARY_VALUE: whether the compound is active (1) or inactive (0) upon the corresponding target
 
-You can replace `dataset_1` with your own dataset (must have the same name, column annotations and format).
+##### Important note:
+
+The sample data set `dataset_1` is provided for demonstration purposes. You can replace it with your own dataset (must have the same name, column annotations and format) to generate the prediction models for the desired targets. The necessary coloumns are the ones mentioned earlier (CAS.number,OFF_TARGET,SMILES,BINARY_VALUE ). The scripts provided are adapted to imbalanced datasets.
 
 ## I. Preparation of the working directory
 
