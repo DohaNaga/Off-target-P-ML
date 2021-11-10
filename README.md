@@ -35,7 +35,11 @@ The script is tested under R version 3.5.1 in R studio version 1.1.456.
 ##### Execution of the script
 ```sh
 #navigate to the folder
-$ cd offtarget_models
+$ cd Offtarget_models
+
+#import the R version that will be used
+
+ml R/3.5.1-goolf-1.7.20
 
 #Run the script
 $ Rscript fingerprints_preparation.R
@@ -49,7 +53,7 @@ A file named `dataset_2` will be produced which contains the CAS.Number of the m
 ## III. Neural networks models
 - The script is tested under R version 3.5.1 in R studio version 1.1.456.
 
-- All scripts must be run from the NeuralNetwork directory
+- All scripts must be run from the NeuralNetworks directory
 
 ```sh
 #navigate to the NeuralNetworks folder
