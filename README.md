@@ -1,6 +1,6 @@
 
 # Off-target modelling
-This repository contains the necessary scripts to build the binary off-target models explained in the paper using (1) A neural network framework (2)An autmomated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics for each model. 
+This repository contains the necessary scripts to build the binary off-target models explained in the paper using (1) A neural network framework (2)An automated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics and graphs for each model. 
 
 
 ## Support: doha.naga@roche.com
@@ -8,9 +8,9 @@ This repository contains the necessary scripts to build the binary off-target mo
 A sample of the main dataset used in the paper is provided : `dataset_1` which  consists of several coloumns, most importantly:
 
 - CAS.number : public id for the compounds
--  OFF_TARGET : the name of the off-target against which the compound is screened
--  SMILES
--  BINARY_VALUE: whether the compound is active (1) or inactive (0) upon the corresponding target
+- OFF_TARGET : the name of the off-target against which the compound is screened
+- SMILES
+- BINARY_VALUE: whether the compound is active (1) or inactive (0) upon the corresponding target
 
 ##### Important note:
 
@@ -128,7 +128,7 @@ x_train <- mnist$train$x
 
 head(x_train)
 
-#should get back a matrix means th
+#you should get back a matrix as follows
   [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23]
 
 ```
@@ -180,7 +180,7 @@ A folder called `tuning` will be created. This folder should contain subfolders 
 - best_runs_ba : A folder containing the best model resulting from the grid search with respect to the best evaluation balanced accuracy.
 - best_runs_acc :  A folder containing the best model resulting from the grid search with respect to the best evaluation  accuracy.
 - best_runs_loss :  A folder containing the best model resulting from the grid search with respect to the best evaluation loss.
-- grid_inforuns : A folder containing all the information on the grid search runs for the balanced accuracy
+- grid_inforuns : A folder containing all the information on the grid search runs for the balanced accuracy for each target.
 
 ```
 tuning
@@ -217,7 +217,7 @@ tuning
 
 The `evaluation.R` script :
 - Imports the best model of each target (in terms of evalution balanced accuracy) in the .h5 format
-- Tests it on the external test sets that werent used in the training or validation
+- Evaluates it on the test sets (that werent used in the training or validation)
 - Calculate the rest of the evaluation metrics(MCC,AUC,AUCPR,Accuracy) and draws AUC/AUCPR plots.
 
 ##### Execution of the evaluation script
