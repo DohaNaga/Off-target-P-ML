@@ -249,15 +249,6 @@ tuning
 - The script constructs models for the 50 off-targets that are mentioned in the paper and are defined in a list in the begining of the script.
 - The script must be run from the AutoGluon directory.
 
-```sh
-#navigate to the AutoGluon folder
-$  cd Autogluon
-
-#create a directory for the training/test sets files
-$ mkdir Autogluon_files
-
-```
-
 
 ##### Dependencies : 
 - Python ≥ 3.6
@@ -266,6 +257,7 @@ $ mkdir Autogluon_files
 - sklearn 0.22.2
 - numpy 1.19.2
 - pandas 0.25.3
+- xlrd 1.2.0
 ### 1- Installation
 
 1- Use the same conda environment previously created for AutoGluon installation
@@ -281,15 +273,31 @@ For more information/problems or alternative installation methods for Autogluon 
 
 ### Input
 
-- You can use autogluon_fileprep.R to generate the training and test files for the autogluon models
-- If you would like to use your proper dataset, make sure to create the training and test files in the same format of dummytrain_autogluon.csv and to name the files in the following manner:
+The script `autogluon_fileprep.R` generates the training and test sets  in the required AutoGluon format. An example for this format is given in dummytrain_autogluon.csv where the coloumns are names in the following manner:
 
-#in dummytrain_autogluon the x1 to x1024 are the finger prints, the "ID" represents the compound ids, for example the cas numbers, the BINARY_VALUE is the activity coloumn.
+#the x1 to x1024 are the finger prints, the "ID" represents the compound ids, (in our case the  CAS.number), the BINARY_VALUE is the activity coloumn.
+
+
+
+```sh
+#navigate to the AutoGluon folder
+$  cd Autogluon
+
+```
+
+```sh
+#navigate to the AutoGluon folder
+$  Rscript autogluon_filesprep.R
+
+```
+### Outcome
+
+A folder called `Autogluon_files` will be produced. This folder contains the training and test sets for all the targets, named as follows `train_'OFF_TARGET'.csv` or `test_'OFF_TARGET'.csv`
+
 
 
 ### 2- Training and evaluation
 
-Describe the format of Autogluon files
 - You can run the script  `Autogluon_models.py` within a jupyter notebook step by step or any other python interface for the training in the AutoGluon directory. This script trains the autogluon models for all the targets and evaluates them on the test sets as well.
 
 - The training settings used in the scripts are the same used in the paper. For more information on other  training settings please visit https://auto.gluon.ai/stable/api/autogluon.predictor.html#autogluon.tabular.TabularPredictor.fit
