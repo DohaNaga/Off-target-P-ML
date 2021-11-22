@@ -1,7 +1,9 @@
 
-# Off-target modelling
-This repository contains the necessary scripts to build the binary off-target models explained in the paper using (1) A neural network framework (2)An automated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics and graphs for each model. 
+# Off-targetP ML
 
+This repository contains the necessary scripts to build the binary off-target models explained in the paper from scratch using (1) A neural network framework (2)An automated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics and graphs for each model. 
+
+It also contains the deep learning offtarget models (h5 format) constructed in the paper and the script needed to implement these models for any given structure.
 
 ## Support: doha.naga@roche.com
 
