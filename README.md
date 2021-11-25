@@ -51,10 +51,13 @@ $ Rscript fingerprints_preparation.R dataset_1.xlsx
 ```
 
 ### Outcome
+Three files are generated with the `Datasets` folder
 
-A file named `dataset_2` will be produced which contains the COMPOUND_ID of the molecules and their ECFP4 binary fingerprints.
+- `dataset_2.csv` : A file contains the COMPOUND_ID of the molecules and their ECFP4 binary fingerprints.
+- `dataset1_curated.xlsx` : Same as the input data (`dataset_1`), but after curation. This dataset is automatically used in the training
+- `actives_inactives.xls` : A file contains the final number of actives and inactives for each target after curation
 
-Note: if some of the smiles were failed to be parsed,they are discarded and a warning is generated
+curation: if any of the smiles were failed to be parsed (errored smiles),they are discarded and a warning is generated. A curated dataset called `dataset1_curated.xlsx` is generated in the dataset folder and is automatically used in the training.
 
 ## III. Neural networks models
 - The script is tested under R version 3.5.1 in R studio version 1.1.456.
