@@ -9,14 +9,14 @@ It also contains the deep learning offtarget models (h5 format) constructed in t
 
 A sample of the main dataset used in the paper is provided : `dataset_1` which  consists of several coloumns, most importantly:
 
-- CAS.number : public id for the compounds
+- COMPOUND_ID : Unique identifier of the compounds (in our case, Cas numbers are provided)
 - OFF_TARGET : the name of the off-target against which the compound is screened
 - SMILES
 - BINARY_VALUE: whether the compound is active (1) or inactive (0) upon the corresponding target
 
 ##### Important note:
 
-The sample data set `dataset_1` is provided for demonstration purposes. You can replace it with your own dataset (must have the same name, column annotations and format) to generate the prediction models for the desired targets. The necessary coloumns are the ones mentioned earlier (CAS.number,OFF_TARGET,SMILES,BINARY_VALUE ). The scripts provided are adapted to imbalanced datasets.
+The sample data set `dataset_1` is provided for demonstration purposes. You can replace it with your own dataset (must have the same format and column annotations/names) to generate the prediction models for the desired targets. The necessary coloumns are the ones mentioned earlier (COMPOUND_ID,OFF_TARGET,SMILES,BINARY_VALUE ). The scripts provided are adapted to imbalanced datasets.
 
 ## I. Preparation of the working directory
 
@@ -45,14 +45,16 @@ $ cd Offtarget_models
 
 ml R/3.5.1-goolf-1.7.20
 
-#Run the script
-$ Rscript fingerprints_preparation.R
+#Run the script with the dataset file name as an argument
+$ Rscript fingerprints_preparation.R dataset_1.xlsx
 
 ```
 
 ### Outcome
 
-A file named `dataset_2` will be produced which contains the CAS.Number of the molecules and their ECFP4 binary fingerprints.
+A file named `dataset_2` will be produced which contains the COMPOUND_ID of the molecules and their ECFP4 binary fingerprints.
+
+Note: if some of the smiles were failed to be parsed,they are discarded and a warning is generated
 
 ## III. Neural networks models
 - The script is tested under R version 3.5.1 in R studio version 1.1.456.
