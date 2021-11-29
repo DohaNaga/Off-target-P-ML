@@ -28,6 +28,11 @@ ECFP4 fingerprints are used for the predictions of the binary activities of the 
 
 You will use the script `fingerprints_preparation.R` to generate the ECFP4 fingerprints for the compounds in `dataset_1`.
 
+This script includes several curation steps :
+- Removal of errored/incomplete smiles that were not parsed (warnings are generated at the end of script execution)
+- Removal of intra-target duplicated smiles. 
+- Removal of duplicated ids encoding same smiles.
+
 The script is tested under R version 3.5.1 in R studio version 1.1.456.
 
 ##### Dependencies : 
@@ -57,7 +62,7 @@ Three files are generated with the `Datasets` folder
 - `dataset1_curated.xlsx` : Same as the input data (`dataset_1`), but after curation. This dataset is automatically used in the training
 - `actives_inactives.xls` : A file contains the final number of actives and inactives for each target after curation
 
-curation: if any of the smiles were failed to be parsed (errored smiles),they are discarded and a warning is generated. A curated dataset called `dataset1_curated.xlsx` is generated in the dataset folder and is automatically used in the training.
+Curation: A curated dataset called `dataset1_curated.xlsx` is generated in the dataset folder and is automatically used in the training.
 
 ## III. Neural networks models
 - The script is tested under R version 3.5.1 in R studio version 1.1.456.
