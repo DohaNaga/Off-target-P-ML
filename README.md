@@ -5,8 +5,15 @@ This repository contains the necessary scripts to build the binary off-target mo
 
 It also contains the deep learning offtarget models (h5 format) constructed in the paper and the script needed to implement these models for any given structure.
 
+A user can choose to :
+
+(1) Develop new customed off-target models using the workflow
+(2) predict the off-target profile read out (actives/inactives) for a set of given structures(Smiles)
+
 ## Support: doha.naga@roche.com
 
+
+## (1) Develop customed off-target models using the workflow:
 A sample of the main dataset used in the paper is provided : `dataset_1` which  consists of several coloumns, most importantly:
 
 - COMPOUND_ID : Unique identifier of the compounds (in our case, Cas numbers are provided)
@@ -352,7 +359,36 @@ AutoGluon
 
 
 
+## (2) Predict the off-target profile read out (actives/inactives) for a set of input molecules(Smiles):
 
+A sample of the input file is provided : `external_test.csv` which consists of two coloumns:
 
+- COMPOUND_ID :Unique identifier of the compounds (in our case, Cas numbers are provided)
+- SMILES
+
+#### Important note :
+Please make sure that : 
+- Your input file has the same format and column annotations as `external_test.csv`.
+- You have Tensorflow and Keras installed on your machine (please see above how to install)
+
+##### Dependencies
+The script is tested under R version 3.5.1 in R studio version 1.1.456.
+
+Same dependencies as mentioned in Section II (preparation of fingerprints), III (neural networks) except for the tfruns (not needed).
+
+##### Execution of the script
+```sh
+#navigate to the `Models` folder
+
+$ cd Offtarget_models/Models
+
+#Run the predictions with the input file as an argument
+$  Rscript Off-targetP_ML.R external_test.csv
+
+```
+
+### Outcome
+
+- predictions.xls : A matrix with the predictions (0:active, 1:inactive) for the input compounds vs the 50 targets. These predictions are generated using the roche in-house models.
 
 
