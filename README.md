@@ -1,5 +1,5 @@
 
-# Off-targetP ML
+# Off-targetPML
 
 This repository contains the necessary scripts to build the binary off-target models explained in the paper from scratch using (1) A neural network framework (2)An automated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics and graphs for each model. 
 
@@ -38,6 +38,7 @@ The script is tested under R version 3.5.1 in R studio version 1.1.456.
 ##### Dependencies : 
 - R 3.5.1
 - rcdk 3.5.0
+- fingerprint 3.5.7
 - rcdklibs 2.3
 
 
@@ -221,10 +222,10 @@ tuning
 ### 3- Evaluation 
 
 ###### Dependencies
--caret 6.0-80
--yardstick 0.0.4
--PPROC 1.3.1
--ggpubr 0.2.3
+- caret 6.0-80
+- yardstick 0.0.4
+- PPROC 1.3.1
+- ggpubr 0.2.3
 
 
 The `evaluation.R` script :
