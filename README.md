@@ -93,8 +93,15 @@ $  cd NeuralNetworks
 
 ### 1- Installation
 
+1. load python 3.6
 
-1. Create a conda working environment from the unix command line
+  ```sh
+
+#this line might vary on how your python versions are named
+
+$ ml python/python3.6-2018.05 
+  ```
+3. Create a conda working environment from the unix command line and activate it
 
   ```sh
 
@@ -108,7 +115,7 @@ $ source activate r-tensorflow
 
 
   ```
-3. once env activated, install keras, tensorflow and tfruns from the environment
+3. Once env activated, install keras, tensorflow and tfruns from the environment
 
   ```sh
 (r-tensorflow)$ pip install tensorflow
