@@ -8,9 +8,16 @@ It also contains the deep learning offtarget models (h5 format) constructed in t
 A user can choose to :
 
 (1) Develop new customed off-target models using the workflow
+
 (2) predict the off-target profile read out (actives/inactives) for a set of given structures(Smiles)
 
+
+
 ## Support: doha.naga@roche.com
+
+![image](https://user-images.githubusercontent.com/52533274/145652120-b594cff5-e05f-4c7f-9a35-491e127eb480.png)
+
+
 
 
 ## (1) Develop customed off-target models using the workflow:
