@@ -1,5 +1,5 @@
 
-# Off-targetPML
+# OfftargetP-ML
 
 This repository contains the necessary scripts to build the binary off-target models explained in the paper from scratch using (1) A neural network framework (2)An automated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics and graphs for each model. 
 
