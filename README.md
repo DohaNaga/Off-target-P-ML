@@ -382,7 +382,7 @@ A sample of the input file is provided : `external_test.csv` which consists of t
 
 #### Important note :
 Please make sure that : 
-- Your input file has the same format and column annotations as `external_test.csv`.
+- Your input file has the same format and column annotations as `sample_test.csv`.
 - You have Tensorflow and Keras installed on your machine (please see above how to install)
 
 ##### Dependencies
