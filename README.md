@@ -34,7 +34,7 @@ The sample data set `dataset_1` is provided for demonstration purposes. You can 
 
 ## I. Preparation of the working directory
 
-- Download and place the folder ```off-targetmodels``` into your home directory
+- Download and place the folder ```Off-targetP_ML``` into your home directory
 
 ## II. Preparation of the models input for both the neuralnetworks and autogluon models
 
@@ -59,7 +59,7 @@ The script is tested under R version 3.5.1 in R studio version 1.1.456.
 ##### Execution of the script
 ```sh
 #navigate to the folder
-$ cd Offtarget_models
+$ cd Off-targetP_ML
 
 #import the R version that will be used
 
@@ -394,7 +394,7 @@ Same dependencies as mentioned in Section II (preparation of fingerprints), III 
 ```sh
 #navigate to the `Models` folder
 
-$ cd Offtarget_models/Models
+$ cd Off-targetP_ML/Models
 
 #Run the predictions with the input file as an argument
 $  Rscript Off-targetP_ML.R external_test.csv
