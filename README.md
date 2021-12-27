@@ -30,7 +30,7 @@ A sample of the main dataset used in the paper is provided : `dataset_1` which  
 
 ##### Important note:
 
-The sample data set `dataset_1` is provided for demonstration purposes. You can replace it with your own dataset (must have the same format and column annotations/names) to generate the prediction models for the desired targets. The necessary coloumns are the ones mentioned earlier (COMPOUND_ID,OFF_TARGET,SMILES,BINARY_VALUE ). The scripts provided are adapted to imbalanced datasets.
+The data set `dataset_1` represents the compiled Excape datasets for the six case studies explained in the paper and is used for demonstration purposes. You can replace it with your own dataset (must have the same format and column annotations/names) to generate the prediction models for the desired targets. The necessary coloumns are the ones mentioned earlier (COMPOUND_ID,OFF_TARGET,SMILES,BINARY_VALUE ). The scripts provided are adapted to imbalanced datasets.
 
 ## I. Preparation of the working directory
 
