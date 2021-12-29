@@ -21,7 +21,7 @@ A user can choose to :
 
 
 ## (1) Develop customed off-target models using the workflow:
-A sample of the main dataset used in the paper is provided : `dataset_1` which  consists of several coloumns, most importantly:
+The  `dataset_1` consists of several coloumns, most importantly:
 
 - COMPOUND_ID : Unique identifier of the compounds (in our case, Cas numbers are provided)
 - OFF_TARGET : the name of the off-target against which the compound is screened
