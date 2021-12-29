@@ -1,0 +1,56 @@
+
+R-3.5.1> FLAGS <- flags(flag_integer("dense_units1", 2048), 
++     flag_numeric("dropout1", 0.1), flag_numeric("lr", 0.01), 
++     flag_integer("dense ..." ... [TRUNCATED] 
+
+R-3.5.1> balanced_acc <- custom_metric("balanced_acc", function(y_true, 
++     y_pred) {
++     y_pred_pos = k_round(k_clip(y_pred, 0, 1))
++     y_pred .... [TRUNCATED] 
+
+R-3.5.1> tensorflow::tf$random$set_seed(42)
+
+R-3.5.1> model <- keras_model_sequential()
+
+R-3.5.1> model %>% layer_dense(units = FLAGS$dense_units1, 
++     activation = FLAGS$activation_1, input_shape = c(1024), kernel_regularizer = regular .... [TRUNCATED] 
+
+R-3.5.1> model %>% compile(loss = "binary_crossentropy", optimizer = optimizer_adam(FLAGS$lr), 
++     metrics = c("binary_accuracy", balanced_acc))
+
+R-3.5.1> early_stop <- callback_early_stopping(monitor = "val_balanced_acc", 
++     mode = "max", patience = 30)
+
+R-3.5.1> callback_check_pt <- callback_model_checkpoint(paste0(targets_dataset[i], 
++     "checkpoints"), monitor = "val_balanced_acc", verbose = 0, 
+ .... [TRUNCATED] 
+
+R-3.5.1> reduce_lr_on_plateau <- callback_reduce_lr_on_plateau(monitor = "val_balanced_acc", 
++     factor = 0.1, patience = 10, verbose = 0, mode = " ..." ... [TRUNCATED] 
+
+R-3.5.1> epochs <- 250
+
+R-3.5.1> history <- model %>% fit(x_train, y_train, epochs = epochs, 
++     validation_split = 0.2, batch_size = FLAGS$batch_size, verbose = 1, 
++     .... [TRUNCATED] 
+
+R-3.5.1> history$params$epochs <- history$metrics$loss %>% 
++     length
+
+R-3.5.1> plot(history)
+
+R-3.5.1> score <- model %>% evaluate(x_test, y_test, verbose = 0)
+
+R-3.5.1> eval_model <- model %>% evaluate(x_test, y_test)
+
+R-3.5.1> pred_model <- model %>% predict_classes(x_test)
+
+R-3.5.1> rownames(pred_model) <- rownames(x_test)
+
+R-3.5.1> proba_model <- model %>% predict_proba(x_test)
+
+R-3.5.1> conf.matrix <- caret::confusionMatrix(factor(pred_model, 
++     levels = 0:1), factor(y_test, levels = 0:1), positive = "1")
+
+R-3.5.1> save_model_tf(model, include_optimizer = TRUE, paste0(targets_dataset[i], 
++     ".h5"))

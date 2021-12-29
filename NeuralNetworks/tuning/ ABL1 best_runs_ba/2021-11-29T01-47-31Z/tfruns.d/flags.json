@@ -1,0 +1,9 @@
+{
+  "dense_units1": 2048,
+  "dropout1": 0.1,
+  "lr": 0.01,
+  "dense_units2": 1024,
+  "dropout2": 0.2,
+  "batch_size": 64,
+  "activation_1": "relu"
+}
