@@ -1,7 +1,7 @@
 
 # OfftargetP-ML
 
-This repository contains the necessary scripts to build the binary off-target models explained in the paper from scratch using (1) A neural network framework (2)An automated machine learning framework (via Autogluon) and calculate the corresponding evaluation metrics and graphs for each model. 
+This repository contains the necessary scripts to build the binary off-target models explained in the paper from scratch using (1) A neural network framework (2)An automated machine learning framework (via Autogluon), (3)Random forest framework. Scripts are available for the calculation of the corresponding evaluation metrics and graphs for each model. 
 
 It also contains the deep learning offtarget models (h5 format) constructed in the paper and the script needed to implement these models for any given structure.
 
@@ -11,7 +11,10 @@ A user can choose to :
 
 (2) predict the off-target profile read out (actives/inactives) for a set of given structures(Smiles)
 
-
+Models implemented:
+- Neural networks
+- Random forest
+- Automated machine learning (Autogluon and H20)
 
 ## Support: doha.naga@roche.com
 
@@ -114,7 +117,7 @@ $ ml python/python3.6-2018.05
 
 #creat conda environment using python 3.6
 
-$ conda create -n r-tensorflow pip python = 3.6
+$ conda create -n r-tensorflow pip python==3.6
 
 #activate  environment
 
@@ -371,7 +374,7 @@ AutoGluon
 
 ```
 
-
+## V. Random Forest 
 
 ## (2) Predict the off-target profile read out (actives/inactives) for a set of input molecules(Smiles):
 
