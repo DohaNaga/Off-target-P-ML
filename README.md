@@ -1,7 +1,7 @@
 
 # OfftargetP-ML
 
-This repository contains the necessary scripts to build the binary off-target models explained in the paper from scratch using (1) A neural network framework (2)An automated machine learning framework (via Autogluon), (3)Random forest framework. Scripts are available for the calculation of the corresponding evaluation metrics and graphs for each model. 
+This repository contains the necessary scripts to build the binary off-target models explained in the paper "OfftargetP ML: An open source machine learning framework for off-target panel safety assessment of small molecules" from scratch using (1) A neural network framework (2)An automated machine learning framework (via Autogluon), (3)Random forest framework. Scripts are available for the calculation of the corresponding evaluation metrics and graphs for each model. 
 
 It also contains the deep learning offtarget models (h5 format) constructed in the paper and the script needed to implement these models for any given structure.
 
@@ -16,7 +16,7 @@ Models implemented:
 - Random forest
 - Automated machine learning (Autogluon and H20)
 
-## Support: doha.naga@roche.com
+
 
 ![image](https://user-images.githubusercontent.com/52533274/146953934-7e8c6ce7-5943-4b42-bf5f-aff83818f001.png)
 
