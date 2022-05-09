@@ -16,7 +16,8 @@ Models implemented:
 - Random forest
 - Automated machine learning (Autogluon and H20)
 
-
+## For any use of the models or code please cite our paper:
+## Naga, D., Muster, W., Musvasva, E. et al. Off-targetP ML: an open source machine learning framework for off-target panel safety assessment of small molecules. J Cheminform 14, 27 (2022). https://doi.org/10.1186/s13321-022-00603-w
 
 ![image](https://user-images.githubusercontent.com/52533274/146953934-7e8c6ce7-5943-4b42-bf5f-aff83818f001.png)
 
